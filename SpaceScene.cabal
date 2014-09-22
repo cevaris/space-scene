@@ -9,6 +9,10 @@ category:          Graphics
 extra-source-files:  readme.md
 
 executable SpaceScene
+    hs-source-dirs:  src
+                     src/objects
+                     src/scene
+                     src/utils
     main-is:         SpaceScene.hs
     build-depends:   base,
                      GLUT,
