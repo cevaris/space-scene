@@ -18,13 +18,14 @@ drawSun w = do
   --lighting $= Enabled
   --light (Light 0) $= Enabled
 
-  color3f 1 1 0
+  preservingAttrib [AllServerAttributes] $ do    
+    --color3f 1 1 0
   
-  scale 0.1 0.1 (0.1::GLfloat)
+    scale 0.1 0.1 (0.1::GLfloat)
   
-  renderObject Solid (Sphere' r s t)
+    renderObject Solid (Sphere' r s t)
 
-  color3f 1 1 1
+  --color3f 1 1 1
 
 
   --(Sphere' w 100 100)

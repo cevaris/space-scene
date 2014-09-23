@@ -157,13 +157,19 @@ draw state = do
 
   --drawCube 0.01
 
+
   preservingMatrix $ do
-    lineWidth $= 2
-    --scale 45 45 (45::GLfloat)
-    callList grid
+    preservingAttrib [AllServerAttributes] $ do
+      lineWidth $= 2
+      color3f 0 0 1  
+      --scale 45 45 (45::GLfloat)
+      callList grid
+
 
   preservingMatrix $ do
     drawSun 2.0
+
+  
 
   preservingMatrix $ do
     currentRasterPosition $= vertex4f 1 0 0 1
