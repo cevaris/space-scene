@@ -17,9 +17,11 @@ vertex3f x y z = Vertex3 ((realToFrac x)::GLfloat) ((realToFrac y)::GLfloat) ((r
 vertex4f :: Float -> Float -> Float -> Float -> Vertex4 GLfloat
 vertex4f x y z w = Vertex4 ((realToFrac x)::GLfloat) ((realToFrac y)::GLfloat) ((realToFrac z)::GLfloat) ((realToFrac w)::GLfloat)
 
+vector3f :: Float -> Float -> Float -> Vector3 GLfloat
+vector3f x y z = Vector3 ((realToFrac x)::GLfloat) ((realToFrac y)::GLfloat) ((realToFrac z)::GLfloat)
+
 color3f :: Float -> Float -> Float -> IO ()
 color3f x y z = color (Color3 ((realToFrac x)::GLfloat) ((realToFrac y)::GLfloat) ((realToFrac z)::GLfloat))
-
 
 glWindowPos :: GLfloat -> GLfloat -> IO ()
 glWindowPos x y = glWindowPos2f x y
