@@ -17,4 +17,5 @@ executable SpaceScene
     build-depends:   base,
                      GLUT,
                      OpenGLRaw,
-                     split
+                     split,
+                     random

@@ -139,6 +139,7 @@ draw state = do
   
   drawGrid 1.0
   drawStar 1.0
+  drawStarCluster 1.0
 
   preservingMatrix $ do
     glWindowPos 5 30
