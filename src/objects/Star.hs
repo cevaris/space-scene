@@ -1,22 +1,16 @@
-module Sun (drawSun) where 
+module Star (drawStar) where 
  
 import Graphics.UI.GLUT
 import Graphics.UI.GLUT.Objects
---import Graphics.Rendering.OpenGL ( Height, Radius, Slices, Stacks, GLint, GLdouble )
 
 import GLUtils
 
-
-drawSun :: GLdouble -> IO ()
-drawSun w = do
+drawStar :: GLdouble -> IO ()
+drawStar w = do
   let r = w
       s = 100
       t = 100
 
-  --position (Light 0) $= Vertex4 5 5 15 0
-  --cullFace $= Just Back
-  --lighting $= Enabled
-  --light (Light 0) $= Enabled
   preservingMatrix $ do
     preservingAttrib [AllServerAttributes] $ do    
       color3f 1 1 0

@@ -5,7 +5,7 @@ import System.Exit ( exitWith, ExitCode(ExitSuccess), exitFailure )
 import Graphics.UI.GLUT
 
 import Cube
-import Sun
+import Star
 import Grid
 import GLUtils
 
@@ -42,12 +42,6 @@ timerFrequencyMillis = 20
 timer :: State -> TimerCallback
 timer state = do
   addTimerCallback timerFrequencyMillis (timer state)
-
-
-----------------------------------------------------------------------------------------------------------------
--- Helper
-
-
 
 ----------------------------------------------------------------------------------------------------------------
 -- Key Binding
@@ -141,32 +135,9 @@ draw state = do
 
   -- Set up perspective
   lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
-
-  --drawCube 0.01
-
-
-  --preservingMatrix $ do
-  --  preservingAttrib [AllServerAttributes] $ do
-  --    lineWidth $= 2
-  --    color3f 0 0 1  
-  --    --scale 45 45 (45::GLfloat)
-  --    callList grid
-
-
   
   drawGrid 1.0
-  drawSun 1.0
-
-  
-
-  preservingMatrix $ do
-    currentRasterPosition $= vertex4f 1 0 0 1
-    renderString Helvetica18 $ "X"
-    currentRasterPosition $= vertex4f 0 1 0 1
-    renderString Helvetica18 $ "Y"
-    currentRasterPosition $= vertex4f 0 0 1 1
-    renderString Helvetica18 $ "Z"
-    currentRasterPosition $= vertex4f 0 0 0 1
+  drawStar 1.0
 
   preservingMatrix $ do
     glWindowPos 5 30

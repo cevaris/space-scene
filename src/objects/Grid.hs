@@ -14,11 +14,23 @@ drawGrid :: GLfloat -> IO ()
 drawGrid w = do
   objectList <- grid
   preservingMatrix $ do
+
     preservingAttrib [AllServerAttributes] $ do
-      lineWidth $= 2
-      color3f 0 0 1
       scale 1.0 1.0 (1.0::GLfloat)
-      callList objectList
+
+      currentRasterPosition $= vertex4f 1 0 0 1
+      renderString Helvetica18 $ "X"
+      currentRasterPosition $= vertex4f 0 1 0 1
+      renderString Helvetica18 $ "Y"
+      currentRasterPosition $= vertex4f 0 0 1 1
+      renderString Helvetica18 $ "Z"
+      currentRasterPosition $= vertex4f 0 0 0 1
+
+      preservingAttrib [AllServerAttributes] $ do
+        lineWidth $= 2
+        color3f 0 0 1
+        callList objectList
+    
  
 grid :: IO DisplayList
 grid = do
