@@ -5,6 +5,7 @@ import System.Exit ( exitWith, ExitCode(ExitSuccess), exitFailure )
 import Graphics.UI.GLUT
 
 import Cube
+import Sun
 import GLUtils
 
 ----------------------------------------------------------------------------------------------------------------
@@ -152,7 +153,7 @@ draw state = do
   rotate th (Vector3 0 1 0)
 
   -- Set up perspective
-  lookAt (Vertex3 0.1 0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
+  lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
 
   --drawCube 0.01
 
@@ -160,6 +161,9 @@ draw state = do
     lineWidth $= 2
     --scale 45 45 (45::GLfloat)
     callList grid
+
+  preservingMatrix $ do
+    drawSun 2.0
 
   preservingMatrix $ do
     currentRasterPosition $= vertex4f 1 0 0 1
