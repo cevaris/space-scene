@@ -6,6 +6,7 @@ import Graphics.UI.GLUT
 
 import Cube
 import Sun
+import Grid
 import GLUtils
 
 ----------------------------------------------------------------------------------------------------------------
@@ -120,20 +121,6 @@ updateInfo state = do
     frames state $= 0
 
 
-----------------------------------------------------------------------------------------------------------------
--- Grid Object
-gridPoints :: [(Float, Float, Float)]
-gridPoints = [(0,0,0),(1,0,0),
-              (0,0,0),(0,1,0),
-              (0,0,0),(0,0,1)]
-
-drawGrid :: State -> IO DisplayList
-drawGrid state = do 
-  grid <- defineNewList Compile $ do
-    renderPrimitive Lines $ do
-      mapM_ (\(x, y, z) -> drawVertex3f x y z ) gridPoints
-  return grid
-
 
 draw :: State -> IO ()
 draw state = do
@@ -143,7 +130,7 @@ draw state = do
   ph <- get (ph' state)
   th <- get (th' state)
   info <- get (info state)
-  grid <- (drawGrid state)
+  --grid <- drawGrid
   
   loadIdentity
 
@@ -158,16 +145,17 @@ draw state = do
   --drawCube 0.01
 
 
-  preservingMatrix $ do
-    preservingAttrib [AllServerAttributes] $ do
-      lineWidth $= 2
-      color3f 0 0 1  
-      --scale 45 45 (45::GLfloat)
-      callList grid
+  --preservingMatrix $ do
+  --  preservingAttrib [AllServerAttributes] $ do
+  --    lineWidth $= 2
+  --    color3f 0 0 1  
+  --    --scale 45 45 (45::GLfloat)
+  --    callList grid
 
 
   
-  drawSun 2.0
+  drawGrid 1.0
+  drawSun 1.0
 
   
 
