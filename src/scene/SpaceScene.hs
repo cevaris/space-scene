@@ -166,8 +166,8 @@ draw state = do
       callList grid
 
 
-  preservingMatrix $ do
-    drawSun 2.0
+  
+  drawSun 2.0
 
   
 

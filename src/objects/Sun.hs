@@ -17,13 +17,13 @@ drawSun w = do
   --cullFace $= Just Back
   --lighting $= Enabled
   --light (Light 0) $= Enabled
-
-  preservingAttrib [AllServerAttributes] $ do    
-    --color3f 1 1 0
-  
-    scale 0.1 0.1 (0.1::GLfloat)
-  
-    renderObject Solid (Sphere' r s t)
+  preservingMatrix $ do
+    preservingAttrib [AllServerAttributes] $ do    
+      color3f 1 1 0
+    
+      scale 0.1 0.1 (0.1::GLfloat)
+    
+      renderObject Solid (Sphere' r s t)
 
   --color3f 1 1 1
 
