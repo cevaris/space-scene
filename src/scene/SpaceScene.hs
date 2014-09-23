@@ -7,6 +7,7 @@ import Graphics.UI.GLUT
 import Cube
 import Star
 import Grid
+import StarCluster
 import GLUtils
 
 ----------------------------------------------------------------------------------------------------------------
