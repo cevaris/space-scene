@@ -153,6 +153,8 @@ draw state = do
   drawStarCluster (5, 5, 5)
   drawStarCluster (1, 2, 5)
 
+  drawFighter (0, 0, 0) (1,0,0) (0, 1,0)
+
   preservingMatrix $ do
     glWindowPos 5 30
     renderString Helvetica18 $ (fst info)
