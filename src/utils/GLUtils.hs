@@ -34,3 +34,6 @@ round2 x = showFFloat (Just 2) x ""
 
 round2GL :: GLfloat -> String
 round2GL x = showGFloat (Just 2) x ""
+
+listf :: [Float] -> [GLfloat]
+listf ls = map (\x -> ((realToFrac x)::GLfloat)) ls

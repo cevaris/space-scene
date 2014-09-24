@@ -8,7 +8,10 @@ import Cube
 import Star
 import Grid
 import StarCluster
+import Fighter
+
 import GLUtils
+
 
 ----------------------------------------------------------------------------------------------------------------
 -- Global State
@@ -127,11 +130,11 @@ draw state = do
   info <- get (info state)
   --grid <- drawGrid
 
-  --scale 0.25 0.25 (0.25::GLfloat)
+  
   
   loadIdentity
 
-  --scale zoom zoom (zoom::GLfloat)
+  scale 0.5 0.5 (0.5::GLfloat)
 
   rotate ph (Vector3 1 0 0)
   rotate th (Vector3 0 1 0)
@@ -142,10 +145,13 @@ draw state = do
   drawGrid 1.0
   drawStar 1.0
 
-  drawStarCluster (2, 2, 3)
-  drawStarCluster (2, 2, 3)
-  drawStarCluster (3, 2, 2)
-  
+  drawStarCluster (10, 1, 3)
+  drawStarCluster (10, 10, 1)
+  drawStarCluster (1, 10, 10)
+
+  drawStarCluster (5, 2, 1)
+  drawStarCluster (5, 5, 5)
+  drawStarCluster (1, 2, 5)
 
   preservingMatrix $ do
     glWindowPos 5 30
