@@ -15,6 +15,6 @@ drawStar w = do
     preservingAttrib [AllServerAttributes] $ do    
       color3f 1 1 0
     
-      scale 0.1 0.1 (0.1::GLfloat)
+      scale 0.25 0.25 (0.25::GLfloat)
     
       renderObject Solid (Sphere' r s t)

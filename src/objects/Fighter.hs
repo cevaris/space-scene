@@ -4,6 +4,12 @@ import Graphics.UI.GLUT
 
 import GLUtils
   
+
+
+--Draw solid airplane
+--  at (x,y,z)
+--  nose towards (dx,dy,dz)
+--  up towards (ux,uy,uz)
 drawFighter :: (Float, Float, Float) -> 
                (Float, Float, Float) ->
                (Float, Float, Float) -> IO ()
