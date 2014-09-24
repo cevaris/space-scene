@@ -24,14 +24,14 @@ import GLUtils
 --randomTupleR :: (Random a, Random b, Random c, RandomGen g) => (a, a) -> (b, b) -> (c, c) -> g -> ((a, b, c), g)
 --randomTupleR xb yb zb = runState (liftA3 (,) (state $ randomR xb) (state $ randomR yb) (state $ randomR zb))
 
-clusterPoints :: (RandomGen g) => Int -> g -> [(Float,Float,Float)]
-clusterPoints n s = zip3 (take n (randomRs ((-1),1) s)) (take n (randomRs ((-1),1) s)) (take n (randomRs ((-1),1) s))
+clusterPoints :: (RandomGen a, RandomGen b, RandomGen c) => Int -> a -> b -> c-> [(Float,Float,Float)]
+clusterPoints n a b c = zip3 (take n (randomRs ((-1),1) a)) (take n (randomRs ((-1),1) b)) (take n (randomRs ((-1),1) c))
   
-drawStarCluster :: (Float, Float, Float) -> GLdouble -> IO ()
-drawStarCluster (xT, yT, zT) w = do
+drawStarCluster :: (Float, Float, Float) -> IO ()
+drawStarCluster (xT, yT, zT) = do
   
 
-  seed  <- getStdGen
+  --seed  <- getStdGen
   --seed <- mkStdGen 42
   --print $ clusterPoints 10 seed
   --print $ take 1 (randomStuff seed)
@@ -44,12 +44,14 @@ drawStarCluster (xT, yT, zT) w = do
   mapM_ (\(x, y, z) -> do
     preservingMatrix $ do
       preservingAttrib [AllServerAttributes] $ do
+        --print ((show x) ++ " " ++ (show y) ++ " " ++ (show z))
         color3f 1 1 0
-        scale 0.1 0.1 (0.1::GLfloat)
-        --scale x x (x::GLfloat)
-        --translate (Vector3 (xT+x) (yT+y) (zT+z))
+        --let v = vector3f (xT*x) (yT*y) (zT*z)
+        --print $ show v
         translatef $ vector3f (xT*x) (yT*y) (zT*z)
-        renderObject Solid (Sphere' w 10 10)
-      ) (clusterPoints 10 seed)
+        scale3f (0.01*abs(x)) (0.01*abs(x)) (0.01*abs(x))
+        --scale 0.01 0.1 (0.1::GLfloat)        
+        renderObject Solid (Sphere' 1 5 5)
+      ) (clusterPoints 100 (mkStdGen 1) (mkStdGen 10) (mkStdGen 30))
             
       

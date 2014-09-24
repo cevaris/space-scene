@@ -126,6 +126,8 @@ draw state = do
   th <- get (th' state)
   info <- get (info state)
   --grid <- drawGrid
+
+  --scale 0.25 0.25 (0.25::GLfloat)
   
   loadIdentity
 
@@ -139,9 +141,11 @@ draw state = do
   
   drawGrid 1.0
   drawStar 1.0
-  drawStarCluster (20, 20, 0) 0.25
 
-  drawStarCluster (0, 20, 20) 0.25
+  drawStarCluster (2, 2, 3)
+  drawStarCluster (2, 2, 3)
+  drawStarCluster (3, 2, 2)
+  
 
   preservingMatrix $ do
     glWindowPos 5 30
