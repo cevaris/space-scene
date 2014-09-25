@@ -5,13 +5,13 @@ import Graphics.UI.GLUT
 import GLUtils
 
 
-drawCube :: (Float, Float, Float) -> IO ()
-drawCube (x, y, z) = do
+drawCube :: Float -> (Float, Float, Float) -> IO ()
+drawCube s (x, y, z) = do
     cubeDisplayList <- (cube 0.25)
     preservingMatrix $ do
       preservingAttrib [AllServerAttributes] $ do
         translate $ vector3f x y z
-        scale3f 1 1 1
+        scale3f s s s
         callList cubeDisplayList
  
 cube :: GLfloat -> IO DisplayList

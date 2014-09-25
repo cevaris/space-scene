@@ -3,7 +3,12 @@ module Pyramid (drawPyramid) where
 import Graphics.UI.GLUT
 
 import GLUtils
-  
+
+-- Draw solid pyramid
+--  scale (s)
+--  at (x,y,z)
+--  nose towards (dx,dy,dz)
+--  up towards (ux,uy,uz)
 drawPyramid :: Float -> 
                (Float, Float, Float) -> 
                (Float, Float, Float) ->
