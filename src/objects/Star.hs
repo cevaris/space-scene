@@ -24,4 +24,3 @@ drawStar s (x, y, z) = do
       scale3f s s s
     
       drawSphere s 0.5 (0,0,0)
-      --renderObject Solid (Sphere' radius slices stacks)

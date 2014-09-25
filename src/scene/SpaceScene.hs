@@ -29,6 +29,7 @@ data State = State {
    t0      :: IORef Int,
    ph'     :: IORef GLfloat,
    th'     :: IORef GLfloat,
+   gr'      :: IORef GLfloat,
    info    :: IORef (String,String)
  }
 
@@ -38,8 +39,9 @@ makeState = do
   t  <- newIORef 0
   ph <- newIORef 0
   th <- newIORef 0
+  gr <- newIORef 0
   i  <- newIORef ("","")
-  return $ State {  frames = f, t0 = t, ph' = ph, th' = th, info = i }
+  return $ State {  frames = f, t0 = t, ph' = ph, th' = th, gr' = gr, info = i }
 
 ----------------------------------------------------------------------------------------------------------------
 -- Timer 
@@ -83,6 +85,11 @@ idle state = do
 
   ph <- get (ph' state)
   th <- get (th' state)
+  gr <- get (gr' state)
+
+  if gr > 360
+    then gr' state $~! (\x -> 0)
+    else gr' state $~! (+2)
   
   if ((-360) > ph || ph > 360)
     then ph' state $~! (\x -> 0)
@@ -124,9 +131,10 @@ updateInfo state = do
     f <- get (frames state)
     ph <- get (ph' state)
     th <- get (th' state)
+    gr <- get (gr' state)
     let seconds = fromIntegral (t - t0') / 1000 :: GLfloat
         fps = fromIntegral f / seconds
-        result = ("[ph " ++ round2GL ph ++ "] [th " ++ round2GL th ++ "]", "")
+        result = ("[ph " ++ round2GL ph ++ "] [th " ++ round2GL th ++ "] [gr " ++ round2GL gr ++ "]", "")
     info state $= result
     t0 state $= t
     frames state $= 0
@@ -140,6 +148,7 @@ draw state = do
 
   ph <- get (ph' state)
   th <- get (th' state)
+  gr <- get (gr' state)
   info <- get (info state)
   
   loadIdentity
@@ -150,25 +159,22 @@ draw state = do
   rotate th (Vector3 0 1 0)
 
   -- Set up perspective
-  --lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
+  lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
   
-  drawGrid 1
-  drawStar 0.5 ((-2), 2, 1)
-
-  --drawSphere 0.5 0.5 (1,1,0)
+  drawGrid 5
+  
+  drawStar 0.5 (0, 1.5, 0)
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)
   drawStarCluster (1, 10, 10)
 
-  drawStation 0.5 (2,0,0) (0,1,0)
+  drawStation 0.0 0.5 (1,0,0) (0,1,0)
+  drawStation gr 0.35 ((-2),0,0) (0,0,1)
 
-  --drawCube (1, 1, 1)
-  --drawPyramid (4, 1, 0)
-
-  --drawFighter (0, 0, 0)  (1,0,0)  (0, 1,0)
-  drawFighter (-1, 1, 0) (-1,0,0) (0,-1,0)
-  --drawFighter (-1,-1, 0) (-1,0,0) (0, 1,0)
+  drawFighter 0.5 (0.55, 0, 0)  (0,1,0)  ((-1), 0,0)
+  drawFighter 0.7 (1, 0.7, 0)  (1,0,0)  (0,1,0)
+  drawFighter 0.5 (0,1,1) (1,1,1) (0,1,0)
 
   preservingMatrix $ do
     glWindowPos 5 30
@@ -183,13 +189,7 @@ draw state = do
 
 myInit :: [String] -> State -> IO ()
 myInit args state = do
-  --position (Light 0) $= Vertex4 5 5 15 0
-  --cullFace $= Just Back
-  --lighting $= Enabled
-  --light (Light 0) $= Enabled
   depthFunc $= Just Less
-  --shadeModel $= Flat 
-  depthRange $= (0, 1)
 
 ----------------------------------------------------------------------------------------------------------------
 -- Key Binding

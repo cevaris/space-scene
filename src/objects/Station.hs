@@ -7,10 +7,11 @@ import GLUtils
 import Cube
 import Pyramid
   
-drawStation :: Float->
+drawStation :: GLfloat ->
+               Float->
                (Float, Float, Float) ->
                (Float, Float, Float) -> IO ()
-drawStation s (x, y, z) (ux, uy, uz) = do
+drawStation a s (x, y, z) (ux, uy, uz) = do
 
     let ws = s*0.6
         wd = 0.5
@@ -21,12 +22,13 @@ drawStation s (x, y, z) (ux, uy, uz) = do
 
         translate $ vector3f x y z
         scale3f s s s
+        rotate a (Vector3 0 1 0)
 
         drawCube cs (0,0,0)
         -- Up
-        drawPyramid s (0,(-1),0) (1,0,0) (0,1,0)
+        drawPyramid s (0,(-0.75),0) (1,0,0) (0,1,0)
         -- Down
-        drawPyramid s (0,1,0) (1,0,0) (0,(-1),0)
+        drawPyramid s (0,0.75,0) (1,0,0) (0,(-1),0)
         
         -- Front
         drawPyramid ws (0,0,wd) (1,0,0) (0,0,(-1))

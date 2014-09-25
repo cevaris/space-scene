@@ -16,40 +16,43 @@ drawCube s (x, y, z) = do
  
 cube :: GLfloat -> IO DisplayList
 cube w = do
+
   cubeDisplayList <- defineNewList Compile $ do
     renderPrimitive Quads $ do
 
-      color3f 0 0 1
+      --color3f (224/255) (223/255) (219/255)
+      color3f (105/255) (105/255) (105/255)
+      --color3f 0 0 1
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 w (-w) w
 
-      color3f 0 1 0
+      --color3f 0 1 0
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 (-w) w (-w)
       vertex $ Vertex3 (-w) w w
       
-      color3f 1 0 0
+      --color3f 1 0 0
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w (-w) w
       vertex $ Vertex3 (-w) (-w) w
       vertex $ Vertex3 (-w) w w
       
-      color3f 1 0 1
+      --color3f 1 0 1
       vertex $ Vertex3 (-w) w w
       vertex $ Vertex3 (-w) w (-w)
       vertex $ Vertex3 (-w) (-w) (-w)
       vertex $ Vertex3 (-w) (-w) w
       
-      color3f 0 1 1
+      --color3f 0 1 1
       vertex $ Vertex3 w (-w) w
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 (-w) (-w) (-w)
       vertex $ Vertex3 (-w) (-w) w
       
-      color3f 1 1 0
+      --color3f 1 1 0
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 (-w) (-w) (-w)
