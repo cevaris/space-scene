@@ -155,7 +155,7 @@ draw state = do
   drawGrid 1
   --drawStar 0.5 ((-2), 2, 1)
 
-  drawSphere 0.001 (0,0,0)
+  drawSphere 0.5 0.5 (1,1,0)
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)

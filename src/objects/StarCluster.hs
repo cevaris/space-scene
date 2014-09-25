@@ -20,7 +20,7 @@ drawStarCluster (xT, yT, zT) = do
   mapM_ (\(x, y, z) -> do
     preservingMatrix $ do
       preservingAttrib [AllServerAttributes] $ do
-        color3f 255 69 0
+        color3f 0 1 0
         translate $ vector3f (xT*x) (yT*y) (zT*z)
         scale3f (0.015*abs(x)) (0.015*abs(x)) (0.015*abs(x))
         renderObject Solid (Sphere' 1 5 5)
