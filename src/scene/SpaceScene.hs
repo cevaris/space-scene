@@ -153,17 +153,13 @@ draw state = do
   --lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
   
   drawGrid 1
-  --drawStar 0.5 ((-2), 2, 1)
+  drawStar 0.5 ((-2), 2, 1)
 
-  drawSphere 0.5 0.5 (1,1,0)
+  --drawSphere 0.5 0.5 (1,1,0)
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)
   drawStarCluster (1, 10, 10)
-
-  --drawStarCluster (5, 2, 1)
-  --drawStarCluster (5, 5, 5)
-  --drawStarCluster (1, 2, 5)
 
   drawStation 0.5 (2,0,0) (0,1,0)
 

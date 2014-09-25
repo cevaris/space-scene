@@ -4,6 +4,9 @@ import Graphics.UI.GLUT
 import Graphics.UI.GLUT.Objects
 
 import GLUtils
+
+import Sphere
+
 -- Draw solid pyramid
 --  scale (s)
 --  at (x,y,z)
@@ -20,4 +23,5 @@ drawStar s (x, y, z) = do
       translate $ vector3f x y z
       scale3f s s s
     
-      renderObject Solid (Sphere' radius slices stacks)
+      drawSphere s 0.5 (0,0,0)
+      --renderObject Solid (Sphere' radius slices stacks)
