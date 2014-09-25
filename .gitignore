@@ -3,4 +3,6 @@ dist/
 *.eventlog
 .cabal-sandbox
 
+*.pdf
+
 SpaceScene
