@@ -4,17 +4,20 @@ import Graphics.UI.GLUT
 import Graphics.UI.GLUT.Objects
 
 import GLUtils
-
-drawStar :: GLdouble -> IO ()
-drawStar w = do
-  let r = w
-      s = 100
-      t = 100
+-- Draw solid pyramid
+--  scale (s)
+--  at (x,y,z)
+drawStar :: Float-> (Float, Float, Float) -> IO ()
+drawStar s (x, y, z) = do
+  let radius = 1.0
+      slices = 100
+      stacks = 100
 
   preservingMatrix $ do
     preservingAttrib [AllServerAttributes] $ do    
       color3f 1 1 0
     
-      scale3f 1 1 1
+      translate $ vector3f x y z
+      scale3f s s s
     
-      renderObject Solid (Sphere' r s t)
+      renderObject Solid (Sphere' radius slices stacks)

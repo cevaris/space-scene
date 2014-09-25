@@ -11,6 +11,7 @@ import StarCluster
 import Fighter
 import Pyramid
 import Station
+import Sphere
 
 import GLUtils
 
@@ -39,9 +40,6 @@ makeState = do
   th <- newIORef 0
   i  <- newIORef ("","")
   return $ State {  frames = f, t0 = t, ph' = ph, th' = th, info = i }
-
-updatePh x v = x { ph' = v }
-updateTh x v = x { th' = v }
 
 ----------------------------------------------------------------------------------------------------------------
 -- Timer 
@@ -152,18 +150,20 @@ draw state = do
   rotate th (Vector3 0 1 0)
 
   -- Set up perspective
-  lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
+  --lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
   
   drawGrid 1
-  --drawStar 1
+  --drawStar 0.5 ((-2), 2, 1)
+
+  drawSphere 0.001 (0,0,0)
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)
   drawStarCluster (1, 10, 10)
 
-  drawStarCluster (5, 2, 1)
-  drawStarCluster (5, 5, 5)
-  drawStarCluster (1, 2, 5)
+  --drawStarCluster (5, 2, 1)
+  --drawStarCluster (5, 5, 5)
+  --drawStarCluster (1, 2, 5)
 
   drawStation 0.5 (2,0,0) (0,1,0)
 
