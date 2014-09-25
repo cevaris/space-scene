@@ -20,10 +20,10 @@ drawStarCluster (xT, yT, zT) = do
   mapM_ (\(x, y, z) -> do
     preservingMatrix $ do
       preservingAttrib [AllServerAttributes] $ do
-        position (Light 0) $= Vertex4 5 5 15 0
-        cullFace $= Just Back
-        --lighting $= Enabled
-        light (Light 0) $= Enabled
+        --position (Light 0) $= Vertex4 5 5 15 0
+        --cullFace $= Just Back
+        ----lighting $= Enabled
+        --light (Light 0) $= Enabled
         
         --color3f 1 1 0
         color3f 255 69 0

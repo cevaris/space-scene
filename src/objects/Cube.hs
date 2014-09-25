@@ -5,36 +5,51 @@ import Graphics.UI.GLUT
 import GLUtils
 
 
-drawCube :: GLfloat -> IO ()
-drawCube w = do
-    cubeDisplayList <- (cube w)
+drawCube :: (Float, Float, Float) -> IO ()
+drawCube (x, y, z) = do
+    cubeDisplayList <- (cube 0.25)
     preservingMatrix $ do
+      preservingAttrib [AllServerAttributes] $ do
+        translate $ vector3f x y z
+        scale3f 1 1 1
         callList cubeDisplayList
  
 cube :: GLfloat -> IO DisplayList
 cube w = do
   cubeDisplayList <- defineNewList Compile $ do
     renderPrimitive Quads $ do
+
+      color3f 0 0 1
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 w (-w) w
+
+      color3f 0 1 0
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 (-w) w (-w)
       vertex $ Vertex3 (-w) w w
+      
+      color3f 1 0 0
       vertex $ Vertex3 w w w
       vertex $ Vertex3 w (-w) w
       vertex $ Vertex3 (-w) (-w) w
       vertex $ Vertex3 (-w) w w
+      
+      color3f 1 0 1
       vertex $ Vertex3 (-w) w w
       vertex $ Vertex3 (-w) w (-w)
       vertex $ Vertex3 (-w) (-w) (-w)
       vertex $ Vertex3 (-w) (-w) w
+      
+      color3f 0 1 1
       vertex $ Vertex3 w (-w) w
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 (-w) (-w) (-w)
       vertex $ Vertex3 (-w) (-w) w
+      
+      color3f 1 1 0
       vertex $ Vertex3 w w (-w)
       vertex $ Vertex3 w (-w) (-w)
       vertex $ Vertex3 (-w) (-w) (-w)

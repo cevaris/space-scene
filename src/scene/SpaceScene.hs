@@ -9,6 +9,8 @@ import Star
 import Grid
 import StarCluster
 import Fighter
+import Pyramid
+import Station
 
 import GLUtils
 
@@ -128,9 +130,6 @@ draw state = do
   ph <- get (ph' state)
   th <- get (th' state)
   info <- get (info state)
-  --grid <- drawGrid
-
-  
   
   loadIdentity
 
@@ -142,8 +141,8 @@ draw state = do
   -- Set up perspective
   lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
   
-  drawGrid 1.0
-  drawStar 1.0
+  drawGrid 1
+  drawStar 1
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)
@@ -153,9 +152,14 @@ draw state = do
   drawStarCluster (5, 5, 5)
   drawStarCluster (1, 2, 5)
 
-  drawFighter (0, 0, 0)  (1,0,0)  (0, 1,0)
+  drawStation (0,0,0) (0,1,0)
+
+  --drawCube (1, 1, 1)
+  --drawPyramid (4, 1, 0)
+
+  --drawFighter (0, 0, 0)  (1,0,0)  (0, 1,0)
   drawFighter (-1, 1, 0) (-1,0,0) (0,-1,0)
-  drawFighter (-1,-1, 0) (-1,0,0) (0, 1,0)
+  --drawFighter (-1,-1, 0) (-1,0,0) (0, 1,0)
 
   preservingMatrix $ do
     glWindowPos 5 30
