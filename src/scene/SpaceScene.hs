@@ -142,7 +142,7 @@ draw state = do
   lookAt (Vertex3 0.1 0.0 0.1) (Vertex3 0 0 0) (Vector3 0 1 0)
   
   drawGrid 1
-  drawStar 1
+  --drawStar 1
 
   drawStarCluster (10, 1, 3)
   drawStarCluster (10, 10, 1)

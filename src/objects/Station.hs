@@ -15,7 +15,8 @@ drawStation (x, y, z) (ux, uy, uz) = do
       preservingAttrib [AllServerAttributes] $ do
         translate $ vector3f x y z
         drawCube (1, 1, 1)
-        drawPyramid (0, 0, 0)
+        drawPyramid 1 (0,(-1),0) (1,0,0) (0,1,0)
+        drawPyramid 1 (0,1,0) (1,0,0) (0,(-1),0)
         
             
       
