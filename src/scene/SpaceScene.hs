@@ -40,6 +40,9 @@ makeState = do
   i  <- newIORef ("","")
   return $ State {  frames = f, t0 = t, ph' = ph, th' = th, info = i }
 
+updatePh x v = x { ph' = v }
+updateTh x v = x { th' = v }
+
 ----------------------------------------------------------------------------------------------------------------
 -- Timer 
 timerFrequencyMillis :: Timeout
@@ -62,16 +65,16 @@ keyboard _     _                    _ _ _ = return ()
 
 modRotate :: State -> SpecialKey -> IO ()
 modRotate state KeyDown = do
-  ph' state $~! (+5)
-  postRedisplay Nothing
-modRotate state KeyUp  = do
   ph' state $~! (\x -> x - 5)
   postRedisplay Nothing
+modRotate state KeyUp  = do
+  ph' state $~! (+5)
+  postRedisplay Nothing
 modRotate state KeyRight = do
-  th' state $~! (+5)
+  th' state $~! (\x -> x - 5)
   postRedisplay Nothing
 modRotate state KeyLeft = do
-  th' state $~!(\x -> x - 5)
+  th' state $~! (+5)
   postRedisplay Nothing
 
 
@@ -79,7 +82,17 @@ modRotate state KeyLeft = do
 -- Misc sate modifiers
 idle :: State -> IdleCallback
 idle state = do
-   postRedisplay Nothing
+
+  ph <- get (ph' state)
+  th <- get (th' state)
+  
+  if ((-360) > ph || ph > 360)
+    then ph' state $~! (\x -> 0)
+    else postRedisplay Nothing
+
+  if ((-360) > th || th > 360)
+    then th' state $~! (\x -> 0)
+    else postRedisplay Nothing
 
 visible :: State -> Visibility -> IO ()
 visible state Visible    = idleCallback $= Just (idle state)
@@ -152,7 +165,7 @@ draw state = do
   drawStarCluster (5, 5, 5)
   drawStarCluster (1, 2, 5)
 
-  drawStation (0,0,0) (0,1,0)
+  drawStation 0.5 (2,0,0) (0,1,0)
 
   --drawCube (1, 1, 1)
   --drawPyramid (4, 1, 0)
