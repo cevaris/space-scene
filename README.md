@@ -9,6 +9,8 @@ A Haskell OpenGL/GLUT implementation Space 3D Scene
     # Execute application
     ./SpaceScene
 
+## Assignment Length
+~15 hours
   
 ### Key Bindings
 
