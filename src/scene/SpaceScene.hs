@@ -191,9 +191,6 @@ myInit :: [String] -> State -> IO ()
 myInit args state = do
   depthFunc $= Just Less
 
-----------------------------------------------------------------------------------------------------------------
--- Key Binding
-
 main :: IO ()
 main = do
     initialWindowSize $= Size 800 800
